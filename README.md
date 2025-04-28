@@ -42,6 +42,7 @@ This directory contains comprehensive documentation for the Komornicka 100 cycli
 |----------|-------------|------|
 | Registration Guide | Guide to the registration process | [USER_GUIDE_REGISTRATION.md](docs/USER_GUIDE_REGISTRATION.md) |
 | Ride Verification Guide | Explanation of how user rides are verified | [USER_GUIDE_RIDES.md](docs/USER_GUIDE_RIDES.md) |
+| PWA | Progressive Web App (PWA) implementation | [PWA.md](docs/PWA.md) |
 
 ### Localized Documentation
 
