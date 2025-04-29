@@ -1,121 +1,171 @@
-# Komornicka 100 PWA Implementation
+# Komornicka 100 PWA Implementation Guide
 
-This document explains the Progressive Web App (PWA) implementation for the Komornicka 100 application, with a focus on solving the issues with deep linking and external URLs.
+This document explains the Progressive Web App (PWA) implementation for the Komornicka 100 application, with a focus on offline capabilities, installation, and handling authentication flows.
 
 ## Overview
 
-The Komornicka 100 app has been configured as a Progressive Web App, allowing users to install it on their devices and use it offline. The PWA implementation includes:
-
-- Service Worker for caching and offline support
-- Web App Manifest for installation and app metadata
-- Special handling for deep links and authentication flows
+The Komornicka 100 app is configured as a Progressive Web App, allowing users to install it on their devices and use portions of it offline. The implementation uses Next.js with next-pwa to provide PWA functionality.
 
 ## Key Files
 
-- `public/service-worker.js` - Service worker for caching and offline functionality
-- `public/pwa.js` - PWA registration script that handles installation and deep linking
-- `public/site.webmanifest` - Web app manifest that defines app metadata and behavior
-- `components/PWADebugComponent.tsx` - Debug component for testing PWA functionality
-- `pages/pwa-test.tsx` - Test page for PWA functionality
+- `frontend/next.config.js` - Contains the next-pwa configuration
+- `frontend/public/manifest.json` - Defines app metadata and installation behavior
+- `frontend/public/site.webmanifest` - Alternative manifest format for broader compatibility
+- `frontend/components/PWAInstaller.tsx` - Handles app installation prompts
+- `frontend/components/PWADebugComponent.tsx` - Debug component for testing PWA functionality
+- `frontend/pages/pwa-test.tsx` - Test page for PWA features and diagnostics
+- `frontend/pages/_document.tsx` - Contains PWA-related meta tags and link elements
+- `frontend/public/offline.html` - Fallback page shown when offline
 
-## How it Works
+## PWA Configuration
 
-### Deep Linking Solution
+The app uses `next-pwa` to handle service worker generation and registration. The configuration in `next.config.js` includes:
 
-The PWA implementation uses a special approach to handle deep links and external URLs:
+```javascript
+const withPWA = require('next-pwa')({
+  dest: 'public',
+  disable: process.env.NODE_ENV === 'development',
+  register: true,
+  skipWaiting: true,
+  sw: 'sw.js',
+  buildExcludes: [/middleware-manifest\.json$/],
+  fallbacks: {
+    document: '/offline.html'
+  },
+  cacheOnFrontEndNav: true,
+  dynamicStartUrl: true,
+  reloadOnOnline: false,
+  swSrc: './worker/index.js'
+});
+```
 
-1. **Critical Paths Exclusion**: The service worker specifically excludes certain paths (like authentication, verification, and Strava auth) from being cached. This ensures these critical flows always go to the network.
+This configuration:
+- Disables the PWA in development mode
+- Registers the service worker automatically
+- Uses `/offline.html` as a fallback when the user is offline
+- Enables caching during front-end navigation
+- Uses a custom service worker source file
 
-2. **Navigation Request Handling**: Special handling for navigation requests ensures deep links work correctly, even when the PWA is installed.
+## Web App Manifest
 
-3. **External Link Handling**: The PWA script includes code to detect and handle external links correctly, opening them in the browser instead of within the PWA.
+The app includes two manifest files for maximum compatibility:
 
-### Authentication Flows
+1. `manifest.json` - Primary manifest file
+2. `site.webmanifest` - Alternative format for broader browser support
 
-The implementation pays special attention to authentication flows, ensuring links in emails and from Strava work correctly:
+Both files define:
+- App name and description
+- Icons in various sizes for different platforms
+- Theme and background colors
+- Display mode (standalone)
+- Start URL and scope
+- Shortcuts for quick access to key features
+
+## PWA Capabilities
+
+The current implementation provides these key capabilities:
+
+- **Installability**: Users can install the app to their home screen
+- **Offline Support**: Core pages and assets are cached for offline use
+- **App-like Experience**: Runs in standalone mode without browser UI
+- **Deep Linking**: Supports navigation to specific pages via URL parameters
+
+## Authentication Flows and PWA
+
+Special consideration has been given to authentication flows:
 
 - Email verification links (`/email-verify/[userId]/[token]`)
 - Account deletion links (`/delete/[userId]/[token]`)
 - Strava authentication links (`/strava-auth/[userId]/[token]`)
 
-These paths are treated as critical and are never cached, ensuring they always work as expected.
+These critical paths are configured to bypass caching to ensure they always work as expected.
+
+## PWA Installation Component
+
+The `PWAInstaller.tsx` component:
+- Detects if the app is installable
+- Shows an installation prompt on mobile devices
+- Only displays in production environments
+- Disappears if the app is already installed
 
 ## Testing PWA Functionality
 
 You can test PWA functionality using the built-in `pwa-test.tsx` page, which includes:
 
-1. **PWA Status Tests**: Check if the PWA is installable, already installed, or running in standalone mode.
-2. **Deep Link Tests**: Test deep linking with various parameters.
-3. **Cache Tests**: Check cache status and allow clearing the cache.
-4. **External Link Tests**: Test how external links are handled.
+1. **PWA Status Tests**: Check if the PWA is installable or already installed
+2. **Manifest Verification**: Confirms the manifest file is available
+3. **Service Worker Checks**: Verifies service worker registration
+4. **Deep Link Tests**: Test navigation with URL parameters
+5. **Cache Management**: Check cache status and clear caches
+6. **External Link Tests**: Test how external links are handled
 
 Access this page at: `/pwa-test`
 
+## PWA Debug Component
+
+The `PWADebugComponent.tsx` component provides detailed diagnostic information:
+
+- Current platform detection
+- Service worker status and URL
+- Manifest availability
+- Installation status
+- Icon availability checks
+
+## Required Icons
+
+For full PWA support, the following icons are required:
+
+- `/apple-touch-icon.png` (180×180)
+- `/favicon-16x16.png` (16×16)
+- `/favicon-32x32.png` (32×32)
+- `/favicon.ico` (multiple sizes)
+- `/android-chrome-192x192.png` (192×192)
+- `/android-chrome-512x512.png` (512×512)
+- `/maskable-icon.png` (512×512 with safe zone padding)
+
+## Offline Fallback
+
+The `/offline.html` page provides a graceful experience when users are offline, explaining:
+- That the user is currently offline
+- How to retry connecting
+- Which features may still be available offline
+
 ## Troubleshooting Common Issues
-
-### Deep Links Not Working
-
-If deep links aren't working properly:
-
-1. Check if the link path is included in the `CRITICAL_PATHS` array in `service-worker.js`.
-2. Test the link using the PWA Test page to see how it's being handled.
-3. Clear the cache using the PWA Test page.
 
 ### Installation Issues
 
-If users can't install the PWA:
+If users cannot install the PWA:
 
-1. Ensure all required icons are available (see the manifest).
-2. Use the PWA Test page to check installability.
-3. Verify the manifest is loading correctly.
+1. Verify all required icons are present
+2. Ensure the manifest is properly configured
+3. Check for any console errors related to service worker registration
+4. Confirm the app is being served over HTTPS in production
 
-### Strava Authentication Issues
+### Service Worker Problems
 
-If Strava authentication isn't working:
+For service worker issues:
 
-1. Ensure `/strava-auth` is in the `CRITICAL_PATHS` array.
-2. Test the authentication flow in both browser and PWA mode.
-3. Check that the service worker isn't interfering with the authentication.
+1. Clear the browser cache and service workers
+2. Check browser support for service workers
+3. Verify the service worker is registering correctly
+4. Use the PWA Test page to inspect service worker status
 
-## PWA Requirements
+### Deep Link Issues
 
-For the PWA to work correctly, ensure:
+If deep links aren't working properly:
 
-1. All icon sizes specified in the manifest are available.
-2. The service worker is registered correctly.
-3. HTTPS is used in production.
-4. The manifest is properly configured.
+1. Test links both in browser mode and standalone PWA mode
+2. Verify URL structure and parameters
+3. Check for any caching issues affecting dynamic content
 
-## Icon Requirements
+## PWA Best Practices Implemented
 
-The following icons are required:
+The current implementation follows these PWA best practices:
 
-- `/apple-touch-icon.png` (180x180)
-- `/favicon-16x16.png` (16x16)
-- `/favicon-32x32.png` (32x32)
-- `/android-chrome-192x192.png` (192x192)
-- `/android-chrome-512x512.png` (512x512)
-- `/maskable-icon.png` (512x512) - Should include padding for the "safe zone"
-
-## PWA Capability Configuration
-
-You can configure which PWA capabilities are enabled by editing the `PWA_FEATURES` object in `public/pwa.js`:
-
-```javascript
-const PWA_FEATURES = {
-  enableInstallPrompt: true,   // Let users install the PWA
-  enableOffline: true,         // Support working offline
-  enableDeepLinks: true,       // Support external deep links
-  enableNotifications: false,  // Push notifications (disabled by default)
-};
-```
-
-## Manual Testing Workflow
-
-When testing the PWA, follow this workflow:
-
-1. Use `/pwa-test` to check PWA status and capabilities.
-2. Test installation by clicking the "Install App" button on the PWA test page.
-3. Test deep links by generating and opening them through the test page.
-4. Test critical paths (authentication, verification, Strava) in both browser and PWA modes.
-5. Use the debug component to diagnose issues.
+- **Responsive Design**: Works on all device sizes
+- **App-like Interface**: Full-screen UI in standalone mode
+- **Custom Offline Page**: Graceful degradation when offline
+- **Fast Load Times**: Core assets are cached for quick loading
+- **Theme-color Support**: Consistent color scheme in the system UI
+- **Installable**: Meets criteria for Add to Home Screen
+- **Mobile-First**: Optimized for mobile devices
