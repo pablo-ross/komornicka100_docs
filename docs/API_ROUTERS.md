@@ -6,6 +6,7 @@ This document provides an overview of the API endpoints available in the Komorni
 
 - [Activities Router](#activities-router)
 - [Auth Router](#auth-router)
+- [Maps Router](#maps-router)
 - [Placeholder Router](#placeholder-router)
 - [Strava Router](#strava-router)
 - [Users Router](#users-router)
@@ -28,6 +29,16 @@ This document provides an overview of the API endpoints available in the Komorni
 |---------|--------|-------------|-------------|---------------|
 | `/auth/settings` | GET | Get public application settings for the frontend | Unknown | No |
 
+## Maps Router
+
+| Endpoint | Method | Description | Return Type | Requires Auth |
+|---------|--------|-------------|-------------|---------------|
+| `/maps/bounds` | GET | Get bounds for all active source GPX routes | Unknown | No |
+| `/maps/cache/clear` | POST | Clear the path cache | Unknown | No |
+| `/maps/source/by-filename/{filename}/path` | GET | Get the path data for a specific source GPX by filename | Unknown | No |
+| `/maps/source/{source_id}/path` | GET | Get the path data for a specific source GPX | Unknown | No |
+| `/maps/sources` | GET | Get all active source GPX routes for maps | Unknown | No |
+
 ## Placeholder Router
 
 | Endpoint | Method | Description | Return Type | Requires Auth |
@@ -39,6 +50,7 @@ This document provides an overview of the API endpoints available in the Komorni
 | Endpoint | Method | Description | Return Type | Requires Auth |
 |---------|--------|-------------|-------------|---------------|
 | `/strava/auth/{user_id}/{token}` | GET | Handle Strava OAuth callback with authorization code | Dict[str | No |
+| `/strava/deactivate/{user_id}` | POST | No description | Dict[str | Yes |
 | `/strava/token/{user_id}` | GET | Get a fresh Strava access token for a user | Dict[str | Yes |
 | `/strava/webhook` | POST | Handle Strava webhook events (not implemented in this version) | Dict[str | No |
 | `/strava/webhook` | GET | Verify Strava webhook subscription | Dict[str | No |
