@@ -15,7 +15,7 @@ This document provides an overview of the API endpoints available in the Komorni
 
 | Endpoint | Method | Description | Return Type | Requires Auth |
 |---------|--------|-------------|-------------|---------------|
-| `/activities/check/{strava_activity_id}` | GET | Check if a Strava activity exists and its verification status | Dict[str | No |
+| `/activities/check/{strava_activity_id}` | GET | Check if a Strava activity exists and its verification status | Dict[str] | No |
 | `/activities/latest` | GET | Get the latest verified activities from active users | Unknown | No |
 | `/activities/leaderboard` | GET | Get leaderboard with top users by activity count | Unknown | No |
 | `/activities/revoke/{activity_id}` | POST | No description | Dict[str | Yes |
