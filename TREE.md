@@ -1,5 +1,5 @@
 # Project Tree
-Generated on: 2025-05-08, 14:12:40 CEST
+Generated on: 2025-05-09, 11:26:26 CEST
 
 This tree only includes files tracked by git (respects .gitignore)
 
@@ -26,5 +26,5 @@ This tree only includes files tracked by git (respects .gitignore)
 ├── README.md
 └── TREE.md
 
-3 directories, 18 files
+2 directories, 18 files
 ```

@@ -8,6 +8,7 @@ This document provides an overview of the API endpoints available in the Komorni
 - [Auth Router](#auth-router)
 - [Maps Router](#maps-router)
 - [Placeholder Router](#placeholder-router)
+- [Pois Router](#pois-router)
 - [Strava Router](#strava-router)
 - [Users Router](#users-router)
 
@@ -15,7 +16,7 @@ This document provides an overview of the API endpoints available in the Komorni
 
 | Endpoint | Method | Description | Return Type | Requires Auth |
 |---------|--------|-------------|-------------|---------------|
-| `/activities/check/{strava_activity_id}` | GET | Check if a Strava activity exists and its verification status | Dict[str] | No |
+| `/activities/check/{strava_activity_id}` | GET | Check if a Strava activity exists and its verification status | Dict[str | No |
 | `/activities/latest` | GET | Get the latest verified activities from active users | Unknown | No |
 | `/activities/leaderboard` | GET | Get leaderboard with top users by activity count | Unknown | No |
 | `/activities/revoke/{activity_id}` | POST | No description | Dict[str | Yes |
@@ -34,7 +35,7 @@ This document provides an overview of the API endpoints available in the Komorni
 | Endpoint | Method | Description | Return Type | Requires Auth |
 |---------|--------|-------------|-------------|---------------|
 | `/maps/bounds` | GET | Get bounds for all active source GPX routes | Unknown | No |
-| `/maps/cache/clear` | POST | Clear the path cache | Unknown | No |
+| `/maps/cache/clear` | POST | Clear the path cache | Unknown | Yes |
 | `/maps/source/by-filename/{filename}/path` | GET | Get the path data for a specific source GPX by filename | Unknown | No |
 | `/maps/source/{source_id}/path` | GET | Get the path data for a specific source GPX | Unknown | No |
 | `/maps/sources` | GET | Get all active source GPX routes for maps | Unknown | No |
@@ -44,6 +45,21 @@ This document provides an overview of the API endpoints available in the Komorni
 | Endpoint | Method | Description | Return Type | Requires Auth |
 |---------|--------|-------------|-------------|---------------|
 | `/placeholder/{width}/{height}` | GET | Generate a placeholder image with specified dimensions | Unknown | No |
+
+## Pois Router
+
+| Endpoint | Method | Description | Return Type | Requires Auth |
+|---------|--------|-------------|-------------|---------------|
+| `/pois` | POST | Create a new POI | Dict[str | Yes |
+| `/pois/bounds` | POST | No description | List[Dict[str | No |
+| `/pois/list` | GET | No description | List[Dict[str | No |
+| `/pois/source/by-filename/{filename}` | GET | No description | List[Dict[str | No |
+| `/pois/source/{source_id}` | GET | No description | List[Dict[str | No |
+| `/pois/webhook/update-gpx` | POST | Trigger an update of GPX files with POIs | Dict[str | Yes |
+| `/pois/{poi_id}` | PUT | Update an existing POI | Dict[str | Yes |
+| `/pois/{poi_id}` | DELETE | Delete a POI | Dict[str | Yes |
+| `/pois/{poi_id}` | GET | Get detailed information about a specific POI | Dict[str | No |
+| `/pois/{poi_id}/deactivate` | PATCH | Deactivate a POI | Dict[str | Yes |
 
 ## Strava Router
 
