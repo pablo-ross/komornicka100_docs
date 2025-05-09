@@ -1,5 +1,5 @@
 # Project Tree
-Generated on: 2025-05-09, 11:26:26 CEST
+Generated on: 2025-05-09, 13:22:24 CEST
 
 This tree only includes files tracked by git (respects .gitignore)
 
@@ -7,6 +7,7 @@ This tree only includes files tracked by git (respects .gitignore)
 .
 ├── docs
 │   ├── API_ROUTERS.md
+│   ├── CDN.md
 │   ├── DEVELOPER.md
 │   ├── EMAIL_TEMPLATES.md
 │   ├── FORM_HONEYPOT.md
@@ -26,5 +27,5 @@ This tree only includes files tracked by git (respects .gitignore)
 ├── README.md
 └── TREE.md
 
-2 directories, 18 files
+2 directories, 19 files
 ```

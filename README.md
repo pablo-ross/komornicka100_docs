@@ -35,6 +35,7 @@ This directory contains comprehensive documentation for the Komornicka 100 cycli
 | Form Honeypot | Anti-bot protection mechanisms for forms | [FORM_HONEYPOT.md](docs/FORM_HONEYPOT.md) |
 | Webhooks | Integration guide for receiving real-time notifications | [WEBHOOKS.md](docs/WEBHOOKS.md) |
 | Email Templates | Email templates system explanation | [EMAIL_TEMPLATES.md](docs/EMAIL_TEMPLATES.md) |
+| CDN | How the static CDN is implemented | [CDN.md](docs/CDN.md) |
 
 ### User Guides
 
