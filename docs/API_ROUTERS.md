@@ -52,6 +52,8 @@ This document provides an overview of the API endpoints available in the Komorni
 |---------|--------|-------------|-------------|---------------|
 | `/pois` | POST | Create a new POI | Dict[str | Yes |
 | `/pois/bounds` | POST | No description | List[Dict[str | No |
+| `/pois/cache/clear` | POST | Clear the POIs route cache | Dict[str | Yes |
+| `/pois/cache/stats` | GET | Get statistics about the POIs route cache | Dict[str | Yes |
 | `/pois/list` | GET | No description | List[Dict[str | No |
 | `/pois/source/by-filename/{filename}` | GET | No description | List[Dict[str | No |
 | `/pois/source/{source_id}` | GET | No description | List[Dict[str | No |

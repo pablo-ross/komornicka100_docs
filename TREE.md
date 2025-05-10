@@ -1,5 +1,5 @@
 # Project Tree
-Generated on: 2025-05-09, 13:22:24 CEST
+Generated on: 2025-05-10, 16:13:53 CEST
 
 This tree only includes files tracked by git (respects .gitignore)
 
@@ -16,6 +16,7 @@ This tree only includes files tracked by git (respects .gitignore)
 │   ├── NGINX_API_GATEWAY.md
 │   ├── pl
 │   │   └── FAQ_pl.md
+│   ├── POI_CACHE.md
 │   ├── PWA.md
 │   ├── STRAVA_DEBUG.md
 │   ├── STRAVA_DUPLICATES.md
@@ -27,5 +28,5 @@ This tree only includes files tracked by git (respects .gitignore)
 ├── README.md
 └── TREE.md
 
-2 directories, 19 files
+2 directories, 20 files
 ```
