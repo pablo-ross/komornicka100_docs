@@ -15,6 +15,7 @@ This document provides an overview of the API endpoints available in the Komorni
 ### Admin Routers
 
 - [Activities Admin Router](#admin_activities-router)
+- [Auditlogs Admin Router](#admin_auditlogs-router)
 - [Auth Admin Router](#admin_auth-router)
 - [Dashboard Admin Router](#admin_dashboard-router)
 - [Maps Admin Router](#admin_maps-router)
@@ -110,12 +111,22 @@ These routes are used for administrative purposes and require authentication.
 | `/activities/{activity_id}` | GET | Get detailed information about a specific activity | Unknown | Yes |
 | `/activities/{activity_id}/revoke` | POST | No description | Unknown | Yes |
 
+## Auditlogs Admin Router
+
+| Endpoint | Method | Description | Return Type | Requires Auth |
+|---------|--------|-------------|-------------|---------------|
+| `/auditlogs/event-types` | GET | Get a list of all unique event types in the audit logs | Unknown | Yes |
+| `/auditlogs/search` | POST | No description | Unknown | Yes |
+| `/auditlogs/{log_id}` | GET | Get detailed information about a specific audit log | Unknown | Yes |
+
 ## Auth Admin Router
 
 | Endpoint | Method | Description | Return Type | Requires Auth |
 |---------|--------|-------------|-------------|---------------|
-| `/auth/refresh` | POST | Refresh the access token using a refresh token | Unknown | Yes |
-| `/auth/token` | POST | Login endpoint for admin users | Unknown | Yes |
+| `/auth/logout` | POST | Logout the current user by clearing all auth cookies | Unknown | Yes |
+| `/auth/refresh` | POST | No description | Unknown | Yes |
+| `/auth/token` | POST | No description | Unknown | Yes |
+| `/auth/validate` | GET | Validate current session token | Unknown | Yes |
 
 ## Dashboard Admin Router
 

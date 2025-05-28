@@ -10,6 +10,7 @@ This directory contains comprehensive documentation for the Komornicka 100 cycli
 |----------|-------------|------|
 | Developer Guide | Complete guide for developers working on the Komornicka 100 application | [DEVELOPER.md](docs/DEVELOPER.md) |
 | API Routers | Overview of all API endpoints available in the application | [API_ROUTERS.md](docs/API_ROUTERS.md) |
+| API Admin Routers | Overview of admin API endpoints available in the application | [API_ADMIN.md](docs/API_ADMIN.md) |
 
 ### Strava Integration
 
@@ -45,6 +46,8 @@ This directory contains comprehensive documentation for the Komornicka 100 cycli
 | Registration Guide | Guide to the registration process | [USER_GUIDE_REGISTRATION.md](docs/USER_GUIDE_REGISTRATION.md) |
 | Ride Verification Guide | Explanation of how user rides are verified | [USER_GUIDE_RIDES.md](docs/USER_GUIDE_RIDES.md) |
 | PWA | Progressive Web App (PWA) implementation | [PWA.md](docs/PWA.md) |
+| Monthly Reports | The monthly report functionality | [MONTHLY_REPORTS.md](docs/MONTHLY_REPORTS.md) |
+| Worker Job Schedules | Scheduled jobs in the worker service | [WORKER_JOBS.md](docs/WORKER_JOBS.md) |
 
 ### Localized Documentation
 

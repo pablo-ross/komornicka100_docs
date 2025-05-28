@@ -1,5 +1,5 @@
 # Project Tree
-Generated on: 2025-05-12, 22:07:20 CEST
+Generated on: 2025-05-28, 16:45:29 CEST
 
 This tree only includes files tracked by git (respects .gitignore)
 
@@ -14,6 +14,7 @@ This tree only includes files tracked by git (respects .gitignore)
 │   ├── FORM_HONEYPOT.md
 │   ├── GPX_ANTIFRAUD.md
 │   ├── GPX_VERIFICATION.md
+│   ├── MONTHLY_REPORTS.md
 │   ├── NGINX_API_GATEWAY.md
 │   ├── pl
 │   │   └── FAQ_pl.md
@@ -25,9 +26,10 @@ This tree only includes files tracked by git (respects .gitignore)
 │   ├── STRAVA_SETUP.md
 │   ├── USER_GUIDE_REGISTRATION.md
 │   ├── USER_GUIDE_RIDES.md
-│   └── WEBHOOKS.md
+│   ├── WEBHOOKS.md
+│   └── WORKER_JOBS.md
 ├── README.md
 └── TREE.md
 
-2 directories, 21 files
+2 directories, 23 files
 ```
